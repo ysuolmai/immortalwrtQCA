@@ -665,6 +665,43 @@ define Device/cmcc_rax3000me
 endef
 TARGET_DEVICES += cmcc_rax3000me
 
+define Device/zhao_7981-r128-dsa
+  DEVICE_VENDOR := ZHAO
+  DEVICE_MODEL := 7981 R128-DSA
+  DEVICE_DTS := mt7981-spim-nand-7981r128-dsa
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := $(MT7981_USB_PKGS) 
+  SUPPORTED_DEVICES := mediatek,zhao-7981r128-d
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 114688k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += zhao_7981-r128-dsa
+
+define Device/zhao_7981-r128-gsw
+  DEVICE_VENDOR := ZHAO
+  DEVICE_MODEL := 7981 R128-GSW
+  DEVICE_DTS := mt7981-spim-nand-7981r128-gsw
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := $(MT7981_USB_PKGS) 
+  SUPPORTED_DEVICES := mediatek,zhao-7981r128-g
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 114688k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += zhao_7981-r128-gsw
+
+
 define Device/comfast_cf-e393ax
   DEVICE_VENDOR := COMFAST
   DEVICE_MODEL := CF-E393AX
